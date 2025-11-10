@@ -1,4 +1,4 @@
-# PowerShell script for Windows users
+﻿# PowerShell script for Windows users
 # Creates a submission zip without including data files and other ignored items
 
 Write-Host "Creating submission package..." -ForegroundColor Cyan
@@ -34,6 +34,6 @@ if ($LASTEXITCODE -ne 0) {
 git archive -o $filename HEAD
 
 Write-Host ""
-Write-Host "✓ Submission package created: $filename" -ForegroundColor Green
+Write-Host "Submission package created: $filename" -ForegroundColor Green
 Write-Host "This includes all your code and analysis, excluding data files and other ignored items." -ForegroundColor Cyan
 Write-Host "Please submit this file." -ForegroundColor Yellow
