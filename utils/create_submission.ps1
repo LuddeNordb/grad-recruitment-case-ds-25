@@ -24,14 +24,14 @@ if ($LASTEXITCODE -ne 0) {
 git diff-index --quiet HEAD -- 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
-    Write-Host "Warning: You have uncommitted changes. Please commit them first:" -ForegroundColor Yellow
+    Write-Host "Warning: You have uncommitted changes. Please commit them first!" -ForegroundColor Yellow
     Write-Host ""
     exit 1
 }
 
 # Use git archive to respect .gitignore
 # This ensures we only include tracked files and exclude everything in .gitignore
-git archive -o $filename HEAD
+git archive -o $filename HEAD --verbose
 
 Write-Host ""
 Write-Host "Submission package created: $filename" -ForegroundColor Green

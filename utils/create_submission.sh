@@ -22,14 +22,14 @@ fi
 # Check for uncommitted changes
 if ! git diff-index --quiet HEAD --; then
     echo ""
-    echo "Warning: You have uncommitted changes. Please commit them first:"
+    echo "Warning: You have uncommitted changes. Please commit them first!"
     echo ""
     exit 1
 fi
 
 # Create zip using git to respect .gitignore
 # This ensures we only include tracked files and exclude everything in .gitignore
-git archive -o "$filename" HEAD
+git archive -o "$filename" HEAD --verbose
 
 echo ""
 echo "✓ Submission package created: $filename"
