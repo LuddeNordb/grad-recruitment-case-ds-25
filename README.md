@@ -4,12 +4,21 @@ For detailed case instructions and submission requirements, follow the [instruct
 
 ## Project Overview
 
-This project provides quantitative forecasts of Swedish demographic changes in the near future to guide market entry and potential decisions. My work involved three steps:\
-**Data Preparation:** I combined nine years (2015–2024) of $1\text{km}^2$ population data into a single dataset and aggregated the population into three strategic groups: Kids, Adults, and Seniors.\
-**Forecasting:** I used an XGBoost machine learning model to predict the population change for each of the three groups in every $1\text{km}^2$ square for the years $\mathbf{2024}$ to $\mathbf{2026}$. I used four years of historical data for each square as well as the mean aggregated regional and communal population size as predictors for future growth. The predicted results were then aggregated per commune, and a percentage change in the three groups was calculated based on the 2024 actual population and the predicted 2026 population.\
-**Strategic Visualization:** I created two key tools for decision-makers:\ 
-Quadrant Matrices: These charts plot Communes based on their Current Market Size (X-axis) and Predicted Growth (Y-axis). This clearly separates markets into four categories: Golden Markets, Future Hubs, Mature, and Shrinking, informing location and timing.\
-Overlap Analysis: This analysis identifies the regions where High Growth is predicted to occur simultaneously across multiple demographic groups (e.g., "All Three Hotspots"), guiding the optimal resource allocation strategy for diversified investments.
+This project delivers a forward-looking, quantitative view of demographic shifts across Sweden to support informed market entry and investment decisions. The analysis was structured into three core workstreams:
+
+**1. Data Preparation**  
+I consolidated nine years of high-resolution (1 km²) population data (2015–2024) into a unified dataset and aggregated individuals into three strategic segments: **Kids**, **Adults**, and **Seniors**. This created a consistent historical foundation for analysing trends at both local and national scales.
+
+**2. Forecasting**  
+Using an XGBoost model, I forecasted population change for each demographic segment in every 1 km² grid cell for **2024–2026**. The model incorporated four years of historical data per grid, together with aggregated regional and municipal population indicators, to predict short-term growth trajectories. Forecasts were then aggregated to commune level, enabling calculation of expected percentage change from 2024 to 2026 for each segment.
+
+**3. Strategic Visualisation**  
+To translate results into actionable insights, I developed two complementary decision tools:  
+- **Quadrant Matrices:** Plotting communes by *current market size* (X-axis) and *predicted growth* (Y-axis), segmenting them into **Golden Markets**, **Future Hubs**, **Mature**, and **Shrinking** areas, therefore clarifying both timing and investment potential.  
+- **Overlap Analysis:** Identifying communes expected to experience concurrent growth across multiple demographic groups (“**All Three Hotspots**”), supporting prioritisation where diversified demand is most likely.
+
+**Note on Further Verification**  
+While the forecasting framework provides a strong directional signal, the underlying data and model outputs should be further validated to ensure no anomalies, artifacts, or data quality issues influence strategic decisions.
 
 ## Environment Setup
 
@@ -47,7 +56,7 @@ venv\Scripts\activate.bat
 venv\Scripts\Activate
 
 # 3. Install dependencies
-pip install pandas numpy scikit-learn matplotlib seaborn xgboost matplotlib-venn geopandas pyarrow
+pip install jupyter pandas numpy scikit-learn matplotlib seaborn xgboost matplotlib-venn geopandas pyarrow tabulate
 ```
 
 ## Usage
@@ -55,17 +64,7 @@ pip install pandas numpy scikit-learn matplotlib seaborn xgboost matplotlib-venn
 ```bash
 # Ensure your environment is active: source venv/bin/activate
 
-# 1. Execute the script to generate the combined Parquet file which contains data for all years as well as region names
-python create_dataset.py
-
-# 2. Execute the script to train the regression models and update the tabular data with the predictions for percent change to 2026
-python train_models.py
-
-# 3. Execute the script to create the matrix plots which saves the images as outputs in the current direcctory
-python create_matrixplot.py
-
-# 4. Execute the script to create the venn diagram plots which saves the images
-python create_venn.py
+jupyter nbconvert --to notebook --execute case.ipynb --output executed_analysis.ipynb 
 ```
 
-Alterntivly everything can be run from the case.ipynb jupiter notebook
+Alterntivly everything can be run directly from the provided case.ipynb jupiter notebook. Outputs will be saved directly in the main directory
